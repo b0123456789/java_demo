@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -89,11 +90,12 @@ public class AuthController {
     public Result me() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {
-            return Result.success(Map.of("username", auth.getName(),
-            "detail",auth.getDetails(),
-            "getCredentials",auth.getCredentials(),
-            "getAuthorities",auth.getAuthorities()
-        ));
+            Map<String, Object> data = new HashMap<>();
+            data.put("username", auth.getName());
+            data.put("detail", auth.getDetails());
+            data.put("credentials", auth.getCredentials());
+            data.put("authorities", auth.getAuthorities());
+            return Result.success(data);
         }
         return Result.error("not login");
     }

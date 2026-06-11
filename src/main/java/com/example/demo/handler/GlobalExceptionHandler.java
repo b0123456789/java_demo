@@ -15,7 +15,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public Result handle500(Exception e) {
-        System.out.println("error=>"+e.getMessage());
-        return Result.error("服务器内部错误");
+        System.out.println("error=>" + e.getClass().getSimpleName() + ": " + e.getMessage());
+        e.printStackTrace();
+        return Result.error("服务器内部错误: " + e.getMessage());
     }
 }
