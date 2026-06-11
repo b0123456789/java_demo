@@ -4,7 +4,12 @@
 <mapper namespace="com.example.demo.dao.UserMapper">
 
     <select id="findByUsername" resultType="com.example.demo.entity.User">
-        SELECT id, username, password FROM user WHERE username = #{username}
+        SELECT id, username, password, salt, create_at, update_at FROM user WHERE username = #{username}
     </select>
+
+    <insert id="insert" parameterType="com.example.demo.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password, salt, create_at, update_at)
+        VALUES (#{username}, #{password}, #{salt}, #{createAt}, #{updateAt})
+    </insert>
 
 </mapper>
