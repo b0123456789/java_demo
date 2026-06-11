@@ -26,8 +26,7 @@ public class AuthController {
         String username = body.get("username");
         String password = body.get("password");
 
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         Authentication authentication = authenticationManager.authenticate(token);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
