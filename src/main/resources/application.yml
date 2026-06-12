@@ -15,23 +15,27 @@ spring:
     jdbc:
       initialize-schema: always  # 自动建 session 表（首次运行）
 
-  #  autoconfigure:
-  #    exclude:
-  #      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-  #      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
-  #      - org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
+
   mvc:
     throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false   # 禁用静态资源映射，纯 API 才开
 
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+app:
+  upload-path: public/upload
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.example.demo.entity
+  type-aliases-package: com.example.demo.entity
   configuration:
     map-underscore-to-camel-case: true   # 下划线转驼峰：user_name → userName
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 控制台打印 SQL
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl   # SQL 日志 → runtime/sql/
 
 enterprise:
   name: tony

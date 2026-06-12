@@ -26,8 +26,8 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     public AuthController(AuthenticationManager authenticationManager,
-                          UserMapper userMapper,
-                          PasswordEncoder passwordEncoder) {
+            UserMapper userMapper,
+            PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
@@ -52,8 +52,8 @@ public class AuthController {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(encodedPassword);  // 密文:盐值 存入 password
-        user.setSalt(salt);                 // 盐值单独存入 salt
+        user.setPassword(encodedPassword); // 密文:盐值 存入 password
+        user.setSalt(salt); // 盐值单独存入 salt
         user.setCreateAt(LocalDateTime.now());
         user.setUpdateAt(LocalDateTime.now());
 
