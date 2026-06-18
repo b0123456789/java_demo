@@ -36,3 +36,4 @@ build/
 *.log
 runtime/
 public/upload/
+data/
