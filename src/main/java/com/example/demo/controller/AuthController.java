@@ -91,10 +91,9 @@ public class AuthController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {
             Map<String, Object> data = new HashMap<>();
-            data.put("username", auth.getName());
-            data.put("detail", auth.getDetails());
-            data.put("credentials", auth.getCredentials());
-            data.put("authorities", auth.getAuthorities());
+            data.put("username", auth.getName());           // 用户名
+            data.put("user", auth.getDetails());            // 完整 User 实体
+            data.put("authorities", auth.getAuthorities()); // 权限
             return Result.success(data);
         }
         return Result.error("not login");
