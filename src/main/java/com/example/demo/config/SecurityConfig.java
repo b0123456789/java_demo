@@ -31,7 +31,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        //无需登录
                         .requestMatchers("/api/auth/**", "/api/cnf/**").permitAll()
+                        //需要登录，不检查角色
                         .requestMatchers("/api/user/**").authenticated()
                         .anyRequest().authenticated()
                 )
